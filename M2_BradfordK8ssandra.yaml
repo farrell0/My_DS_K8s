@@ -1,0 +1,16 @@
+
+
+cassandra:
+  enabled: false
+
+stargate:
+  enabled: false
+
+kube-prometheus-stack:
+  enabled: false
+
+reaper-operator:
+  enabled: false
+
+
+

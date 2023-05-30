@@ -1,0 +1,172 @@
+apiVersion: v1
+items:
+- apiVersion: cassandra.datastax.com/v1beta1
+  kind: CassandraDatacenter
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"cassandra.datastax.com/v1beta1","kind":"CassandraDatacenter","metadata":{"annotations":{},"name":"dc1","namespace":"ns-cass-sys2"},"spec":{"clusterName":"cluster1","config":{"cassandra-yaml":{"authenticator":"org.apache.cassandra.auth.PasswordAuthenticator","authorizer":"org.apache.cassandra.auth.CassandraAuthorizer","role_manager":"org.apache.cassandra.auth.CassandraRoleManager"},"jvm-options":{"additional-jvm-opts":["-Ddse.system_distributed_replication_dc_names=dc1","-Ddse.system_distributed_replication_per_dc=1"],"initial_heap_size":"800M","max_heap_size":"800M"}},"initContainers":[{"command":["sh","-c"," mkdir /var/lib/cassandra/staging_directory","chmod 777 /var/lib/cassandra/staging_directory"],"image":"busybox:latest","name":"backup-setup"}],"managementApiAuth":{"insecure":{}},"serverType":"cassandra","serverVersion":"3.11.7","size":3,"storageConfig":{"cassandraDataVolumeClaimSpec":{"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"5Gi"}},"storageClassName":"server-storage"}}}}
+    creationTimestamp: "2021-01-19T21:06:13Z"
+    finalizers:
+    - finalizer.cassandra.datastax.com
+    generation: 2
+    name: dc1
+    namespace: ns-cass-sys2
+    resourceVersion: "4122"
+    selfLink: /apis/cassandra.datastax.com/v1beta1/namespaces/ns-cass-sys2/cassandradatacenters/dc1
+    uid:
+  spec:
+    clusterName: cluster1
+    config:
+      cassandra-yaml:
+        authenticator: org.apache.cassandra.auth.PasswordAuthenticator
+        authorizer: org.apache.cassandra.auth.CassandraAuthorizer
+        role_manager: org.apache.cassandra.auth.CassandraRoleManager
+      jvm-options:
+        additional-jvm-opts:
+        - -Ddse.system_distributed_replication_dc_names=dc1
+        - -Ddse.system_distributed_replication_per_dc=1
+        initial_heap_size: 800M
+        max_heap_size: 800M
+    configBuilderResources: {}
+    managementApiAuth:
+      insecure: {}
+    resources: {}
+    serverType: cassandra
+    serverVersion: 3.11.7
+    size: 3
+    storageConfig:
+      cassandraDataVolumeClaimSpec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 5Gi
+        storageClassName: server-storage
+    systemLoggerResources: {}
+  status:
+    cassandraOperatorProgress: Ready
+    conditions:
+    - lastTransitionTime: "2021-01-19T21:10:21Z"
+      message: ""
+      reason: ""
+      status: "False"
+      type: ScalingUp
+    - lastTransitionTime: "2021-01-19T21:10:21Z"
+      message: ""
+      reason: ""
+      status: "False"
+      type: Updating
+    - lastTransitionTime: "2021-01-19T21:10:21Z"
+      message: ""
+      reason: ""
+      status: "False"
+      type: Stopped
+    - lastTransitionTime: "2021-01-19T21:10:21Z"
+      message: ""
+      reason: ""
+      status: "False"
+      type: ReplacingNodes
+    - lastTransitionTime: "2021-01-19T21:10:21Z"
+      message: ""
+      reason: ""
+      status: "False"
+      type: RollingRestart
+    - lastTransitionTime: "2021-01-19T21:10:21Z"
+      message: ""
+      reason: ""
+      status: "False"
+      type: Resuming
+    - lastTransitionTime: "2021-01-19T21:10:21Z"
+      message: ""
+      reason: ""
+      status: "False"
+      type: ScalingDown
+    - lastTransitionTime: "2021-01-19T21:10:21Z"
+      message: ""
+      reason: ""
+      status: "True"
+      type: Valid
+    - lastTransitionTime: "2021-01-19T21:10:21Z"
+      message: ""
+      reason: ""
+      status: "True"
+      type: Initialized
+    - lastTransitionTime: "2021-01-19T21:10:21Z"
+      message: ""
+      reason: ""
+      status: "True"
+      type: Ready
+    lastServerNodeStarted: "2021-01-19T21:09:00Z"
+    nodeStatuses:
+      cluster1-dc1-default-sts-0:
+        hostID: 3fb3dbce-9ee9-4103-a4a7-0d8a03d57425
+      cluster1-dc1-default-sts-1:
+        hostID: 92a06255-df02-49bc-a17e-7fba96910863
+      cluster1-dc1-default-sts-2:
+        hostID: 720b55e9-cbd8-4a7a-b89f-eb9223eacc86
+    observedGeneration: 2
+    quietPeriod: "2021-01-19T21:10:32Z"
+    superUserUpserted: "2021-01-19T21:10:27Z"
+    usersUpserted: "2021-01-19T21:10:27Z"
+- apiVersion: cassandra.datastax.com/v1beta1
+  kind: CassandraDatacenter
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"cassandra.datastax.com/v1beta1","kind":"CassandraDatacenter","metadata":{"annotations":{},"name":"dc2","namespace":"ns-cass-sys2"},"spec":{"clusterName":"cluster1","config":{"cassandra-yaml":{"authenticator":"org.apache.cassandra.auth.PasswordAuthenticator","authorizer":"org.apache.cassandra.auth.CassandraAuthorizer","role_manager":"org.apache.cassandra.auth.CassandraRoleManager"},"jvm-options":{"additional-jvm-opts":["-Ddse.system_distributed_replication_dc_names=dc1","-Ddse.system_distributed_replication_per_dc=1"],"initial_heap_size":"800M","max_heap_size":"800M"}},"initContainers":[{"command":["sh","-c"," mkdir /var/lib/cassandra/staging_directory","chmod 777 /var/lib/cassandra/staging_directory"],"image":"busybox:latest","name":"backup-setup"}],"managementApiAuth":{"insecure":{}},"serverType":"cassandra","serverVersion":"3.11.7","size":2,"storageConfig":{"cassandraDataVolumeClaimSpec":{"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"5Gi"}},"storageClassName":"server-storage"}}}}
+    creationTimestamp: "2021-01-19T23:30:07Z"
+    finalizers:
+    - finalizer.cassandra.datastax.com
+    generation: 2
+    name: dc2
+    namespace: ns-cass-sys2
+    resourceVersion: "52123"
+    selfLink: /apis/cassandra.datastax.com/v1beta1/namespaces/ns-cass-sys2/cassandradatacenters/dc2
+    uid:
+  spec:
+    clusterName: cluster1
+    config:
+      cassandra-yaml:
+        authenticator: org.apache.cassandra.auth.PasswordAuthenticator
+        authorizer: org.apache.cassandra.auth.CassandraAuthorizer
+        role_manager: org.apache.cassandra.auth.CassandraRoleManager
+      jvm-options:
+        additional-jvm-opts:
+        - -Ddse.system_distributed_replication_dc_names=dc1
+        - -Ddse.system_distributed_replication_per_dc=1
+        initial_heap_size: 800M
+        max_heap_size: 800M
+    configBuilderResources: {}
+    managementApiAuth:
+      insecure: {}
+    resources: {}
+    serverType: cassandra
+    serverVersion: 3.11.7
+    size: 2
+    storageConfig:
+      cassandraDataVolumeClaimSpec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 5Gi
+        storageClassName: server-storage
+    systemLoggerResources: {}
+  status:
+    cassandraOperatorProgress: Updating
+    conditions:
+    - lastTransitionTime: "2021-01-19T23:30:13Z"
+      message: ""
+      reason: ""
+      status: "True"
+      type: ScalingUp
+    lastServerNodeStarted: "2021-01-19T23:31:19Z"
+    nodeStatuses:
+      cluster1-dc2-default-sts-0:
+        hostID: 0276e8b7-bcfd-43ea-98c4-50bc0bedd655
+      cluster1-dc2-default-sts-1: {}
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""

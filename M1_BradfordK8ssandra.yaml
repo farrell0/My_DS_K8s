@@ -1,0 +1,41 @@
+
+
+cassandra:
+  version: "4.0.0"
+  enabled: False
+
+  cassandraLibDirVolume:
+    storageClass: server-storage
+    size: 5Gi
+  heap:
+   size: 12G
+   newGenSize: 12G
+  resources:
+    requests:
+      cpu: 6000m                  # 6 cores
+      # cpu: 10000m 
+      memory: 20Gi
+    limits:
+      cpu: 6000m
+      # cpu: 10000m
+      memory: 20Gi
+
+  datacenters:
+  - name: dc1
+    size: 1
+
+stargate:
+  enabled: false
+  replicas: 1
+  heapMB: 1024
+  cpuReqMillicores: 3000          # 3 cores
+  cpuLimMillicores: 3000
+
+kube-prometheus-stack:
+  enabled: false
+
+reaper-operator:
+  enabled: false
+
+
+

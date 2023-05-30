@@ -1,0 +1,27 @@
+
+
+#
+#  kubectl -n kube-system rollout restart deployment kube-dns
+#  apt install -y dnsutils
+#  https://geek-university.com/linux/nslookup-command/
+#
+
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: stargate-service
+  namespace: ns-user2
+spec:
+  type: ExternalName
+  externalName: k8ssandra-dc1-stargate-service.my-k8s.svc.cluster.local
+  ports:
+  - port: 8080
+    name: name-8080
+  - port: 8081
+    name: name-8081
+  - port: 8082
+    name: name-8082
+
+
+

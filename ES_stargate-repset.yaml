@@ -1,0 +1,104 @@
+#
+#  This YAML creates a replica set that runs StarGate within.
+#  This StarGate targets the C*/DSE cluster in MY_NS_CCLUSTER1.
+#
+
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: stargate-repset
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: stargate-repset
+  template:
+    metadata:
+      labels:
+        tier: stargate-repset
+    spec:
+
+      initContainers:
+      - name: openjdk-init
+        image: openjdk:8
+
+        command: ["/bin/bash", "-c"]
+        args:
+        - |
+          mkdir -p  /opt/stargate
+          chmod 777 /opt/stargate
+          cd        /opt/stargate
+          #
+          curl -L https://github.com/stargate/stargate/releases/download/v1.0.25/stargate-jars.zip > zzz.zip
+        volumeMounts:
+        - name: opt
+          mountPath: /opt
+      volumes:
+      - name: opt
+        emptyDir: {}
+
+      containers:
+      - name: openjdk
+        image: openjdk:8
+        env:
+          - name: C_CLUSTER_NAME
+            valueFrom:
+              secretKeyRef:
+                name: dse-conn-details
+                key: cluster-name
+          - name: C_CLUSTER_SEED
+            valueFrom:
+              secretKeyRef:
+                name: dse-conn-details
+                key: cluster-seed
+          - name: C_CLUSTER_VERSION
+            valueFrom:
+              secretKeyRef:
+                name: dse-conn-details
+                key: cluster-version
+          - name: C_DC
+            valueFrom:
+              secretKeyRef:
+                name: dse-conn-details
+                key: dc
+          - name: C_RACK
+            valueFrom:
+              secretKeyRef:
+                name: dse-conn-details
+                key: rack
+        command: ["/bin/bash", "-c"]
+        args:
+        - |
+          apt-get update
+          apt-get install -y vim 
+          apt-get install -y unzip 
+             #
+          cd /opt/stargate
+          unzip zzz.zip
+          rm -r zzz.zip
+             #
+          C_LISTEN=`hostname -I`
+             #
+          ./starctl --cluster-name ${C_CLUSTER_NAME} --cluster-seed ${C_CLUSTER_SEED} --cluster-version ${C_CLUSTER_VERSION} --listen ${C_LISTEN} --dc ${C_DC} --rack ${C_RACK} --dse --enable-auth
+          #
+          #  For testing,
+          #
+          # sleep infinity & wait
+    
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: opt
+          mountPath: /opt
+      volumes:
+      - name: opt
+        emptyDir: {}
+    
+
+
+
+
+
+
