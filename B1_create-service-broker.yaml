@@ -1,0 +1,20 @@
+
+
+apiVersion: servicecatalog.k8s.io/v1beta1
+
+kind: ServiceBroker
+
+metadata:
+  name: astra
+  namespace: ns-myapp1
+
+spec:
+  authInfo:
+    basic:
+      secretRef:
+        name: astra-creds
+  url: https://broker.astra.datastax.com/
+
+
+
+

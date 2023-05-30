@@ -1,0 +1,21 @@
+
+
+apiVersion: servicecatalog.k8s.io/v1beta1
+
+kind: ServiceInstance
+metadata:
+  name: my-svc-db
+  namespace: ns-myapp1
+
+spec:
+  parameters:
+    capacity_units: 1
+    cloud_provider: GCP
+    keyspace: my_keyspace
+    region: us-east1
+
+  serviceClassExternalName: astra-database
+  servicePlanExternalName: developer
+
+
+

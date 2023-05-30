@@ -1,0 +1,24 @@
+
+
+apiVersion: servicecatalog.k8s.io/v1beta1
+
+kind: ServiceBinding
+
+metadata:
+  name: my-svc-db
+  namespace: ns-myapp1
+
+spec:
+  #
+  #  copy this from the Astra UI
+  #
+  externalID: 95c2be64-3d3b-4ad1-af96-13713ac020db
+
+  instanceRef:
+    name: my-svc-db
+  secretName: my-svc-db
+
+
+
+
+
